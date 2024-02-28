@@ -23,25 +23,26 @@ const PostListItem = ({ post }: PostListItemProps) => {
   return (
     <Link href={`/posts/${post.id}`} asChild>
       <Pressable style={styles.container}>
-        <View style={styles.header}>
-          <Image source={{ uri: post.author.image }} style={styles.userImage} />
-          <View>
-            <Text style={styles.userName}>{post.author.name}</Text>
-            <Text style={styles.position}>{post.author.position}</Text>
+        <Link href={`/users/${post.author.id}`} asChild>
+          <Pressable style={styles.header}>
+            <Image source={{ uri: post.author.image }} style={styles.userImage} />
+            <View>
+              <Text style={styles.userName}>{post.author.name}</Text>
+              <Text style={styles.position}>{post.author.position}</Text>
+            </View>
+          </Pressable>
+        </Link>
+          <Text style={styles.content}>{post.content}</Text>
+          
+          {post.image && (
+            <Image source={{ uri: post.image }} style={styles.postImage} />
+          )}
+
+          <View style={styles.footer}>
+            <FooterButton text="Like" icon="thumbs-o-up" />
+            <FooterButton text="Comment" icon="comment-o" />
+            <FooterButton text="Share" icon="share" />
           </View>
-        </View>
-
-        <Text style={styles.content}>{post.content}</Text>
-        
-        {post.image && (
-          <Image source={{ uri: post.image }} style={styles.postImage} />
-        )}
-
-        <View style={styles.footer}>
-          <FooterButton text="Like" icon="thumbs-o-up" />
-          <FooterButton text="Comment" icon="comment-o" />
-          <FooterButton text="Share" icon="share" />
-        </View>
       </Pressable>
     </Link>
   );
